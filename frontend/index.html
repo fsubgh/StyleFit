@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StyleFit — магазин одежды с персональным подбором стиля.">
+    <title>StyleFit — твой стиль, твои правила</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'app.js' %}" defer></script>
+</head>
+<body>
+    <header class="header">
+        <a class="logo" href="#home">style<span>fit</span>.</a>
+
+        <nav class="navigation">
+            <a href="#home">Главная</a>
+            <a href="#catalog">Каталог</a>
+            <a href="#stylist">Подбор одежды</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="/cart/" class="cart-link">
+            🛒 Корзина
+            <span id="cart-count">0</span>
+            </a>
+            <a class="login-link" href="#account">Войти</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Главный экран -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="eyebrow">ТВОЙ СТИЛЬ НАЧИНАЕТСЯ ЗДЕСЬ</p>
+
+                <h1>Одежда, которая<br>подходит <span>именно тебе.</span></h1>
+
+                <p class="hero-description">
+                    Находи вещи под свой стиль, выбирай любимые образы
+                    и открывай одежду, в которой тебе комфортно.
+                </p>
+
+                <div class="hero-buttons">
+                    <a class="button button-dark" href="#catalog">
+                        Смотреть каталог
+                    </a>
+                    <a class="button button-light" href="#stylist">
+                        Подобрать одежду
+                    </a>
+                </div>
+
+                <div class="hero-note">
+                    <span class="note-dot"></span>
+                    Твой гардероб. Твои правила.
+                </div>
+            </div>
+
+            <div class="hero-art">
+                <div class="art-card art-card-back">
+                    <span>YOUR STYLE</span>
+                </div>
+
+                <div class="art-card art-card-front">
+                    <div class="art-circle"></div>
+                    <div class="art-line art-line-one"></div>
+                    <div class="art-line art-line-two"></div>
+                    <div class="art-line art-line-three"></div>
+                    <span class="art-label">STYLE / 001</span>
+                </div>
+
+                <div class="floating-label">
+                    <span class="floating-star">✳</span>
+                    <div>
+                        <strong>Найди своё</strong>
+                        <small>Идеи для твоего гардероба</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section class="benefits">
+            <div class="benefit">
+                <span class="benefit-number">01</span>
+                <div>
+                    <h3>Персональный подбор</h3>
+                    <p>Выбирай одежду под свой тип фигуры.</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <span class="benefit-number">02</span>
+                <div>
+                    <h3>Удобный каталог</h3>
+                    <p>Находи вещи по категориям и полу.</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <span class="benefit-number">03</span>
+                <div>
+                    <h3>Всё в одном месте</h3>
+                    <p>Собирай корзину и оформляй заказ.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Каталог -->
+        <section class="catalog section" id="catalog">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">ТВОЙ СЛЕДУЮЩИЙ ОБРАЗ</p>
+                    <h2>Исследуй каталог<span>.</span></h2>
+                </div>
+
+                <p class="section-description">
+                    Выбирай то, что нравится именно тебе.
+                </p>
+            </div>
+
+            <div class="catalog-toolbar">
+                <div class="filter-group">
+                    <button type="button" class="filter-button active" data-gender="all">
+                        Всё
+                    </button>
+                    <button type="button" class="filter-button" data-gender="female">
+                        Женское
+                    </button>
+                    <button type="button" class="filter-button" data-gender="male">
+                        Мужское
+                    </button>
+                    <button type="button" class="filter-button" data-gender="unisex">
+                        Унисекс
+                    </button>
+                </div>
+
+                <span id="product-count" class="product-count">
+                    Загружаем товары...
+                </span>
+            </div>
+
+            <div id="product-list" class="product-grid">
+                <p class="loading-message">Загружаем каталог StyleFit...</p>
+            </div>
+        </section>
+
+        <!-- Персональный подбор -->
+        <section class="stylist section" id="stylist">
+            <div class="stylist-info">
+                <p class="eyebrow">ТВОЙ ПЕРСОНАЛЬНЫЙ ПОДБОР</p>
+
+                <h2>Найди вещи,<br>которые подходят <span>тебе.</span></h2>
+
+                <p>
+                    Выбери пол и тип фигуры. StyleFit найдёт в каталоге
+                    товары, которые были отмечены для выбранного типа фигуры.
+                </p>
+
+                <div class="stylist-steps">
+                    <span><b>01</b> Выбери пол</span>
+                    <span><b>02</b> Укажи тип фигуры</span>
+                    <span><b>03</b> Изучи подборку</span>
+                </div>
+            </div>
+
+            <div class="stylist-form">
+                <label for="gender-select">Для кого подбираем одежду?</label>
+
+                <select id="gender-select">
+                    <option value="female">Женская одежда</option>
+                    <option value="male">Мужская одежда</option>
+                </select>
+
+                <label for="body-type-select">Тип фигуры</label>
+
+                <select id="body-type-select">
+                    <option value="">Загружаем типы фигуры...</option>
+                </select>
+
+                <button
+                    type="button"
+                    id="recommend-button"
+                    class="button button-dark button-full"
+                >
+                    Подобрать одежду
+                </button>
+
+                <p id="recommend-message" class="form-message">
+                    Подбор учитывает товары, отмеченные в каталоге.
+                </p>
+            </div>
+        </section>
+
+        <!-- Результаты подбора -->
+        <section
+            class="recommendations section"
+            id="recommendations-section"
+            hidden
+        >
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">СПЕЦИАЛЬНО ДЛЯ ТЕБЯ</p>
+                    <h2>Твоя подборка<span>.</span></h2>
+                </div>
+            </div>
+
+            <div id="recommendation-list" class="product-grid"></div>
+        </section>
+
+
+<!-- Регистрация, вход и аккаунт -->
+<section class="account-section section" id="account">
+    <div class="account-intro">
+        <p class="eyebrow">ТВОЁ ПРОСТРАНСТВО</p>
+        <h2>Твой профиль в StyleFit<span>.</span></h2>
+        <p>
+            Создай аккаунт, сохраняй любимые образы
+            и открывай новые возможности своего стиля.
+        </p>
+    </div>
+
+    <div class="auth-card">
+        <div id="auth-forms">
+            <div class="auth-tabs">
+                <button type="button" id="show-login" class="auth-tab active">
+                    Войти
+                </button>
+                <button type="button" id="show-register" class="auth-tab">
+                    Регистрация
+                </button>
+            </div>
+
+            <!-- Форма входа -->
+            <form id="login-form">
+                <label for="login-email">Электронная почта</label>
+                <input
+                    type="email"
+                    id="login-email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="login-password">Пароль</label>
+                <input
+                    type="password"
+                    id="login-password"
+                    name="password"
+                    placeholder="Введи пароль"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button type="submit" class="button button-dark button-full">
+                    Войти в аккаунт
+                </button>
+            </form>
+
+            <!-- Форма регистрации -->
+            <form id="register-form" hidden>
+                <label for="register-first-name">Имя</label>
+                <input
+                    type="text"
+                    id="register-first-name"
+                    name="first_name"
+                    placeholder="Как тебя зовут?"
+                    autocomplete="given-name"
+                    required
+                >
+
+                <label for="register-last-name">Фамилия</label>
+                <input
+                    type="text"
+                    id="register-last-name"
+                    name="last_name"
+                    placeholder="Твоя фамилия"
+                    autocomplete="family-name"
+                    required
+                >
+
+                <label for="register-email">Электронная почта</label>
+                <input
+                    type="email"
+                    id="register-email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="register-password">Пароль</label>
+                <input
+                    type="password"
+                    id="register-password"
+                    name="password"
+                    placeholder="Придумай пароль"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <label for="register-password-repeat">Повтори пароль</label>
+                <input
+                    type="password"
+                    id="register-password-repeat"
+                    name="password_repeat"
+                    placeholder="Введи пароль ещё раз"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <button type="submit" class="button button-dark button-full">
+                    Создать аккаунт
+                </button>
+            </form>
+
+            <p id="auth-message" class="form-message" aria-live="polite"></p>
+        </div>
+
+        <!-- Панель после входа -->
+        <div id="logged-in-panel" hidden>
+            <h3>Добро пожаловать в StyleFit!</h3>
+            <p id="logged-in-username"></p>
+
+            <button
+                type="button"
+                id="logout-button"
+                class="button button-dark button-full"
+            >
+                Выйти из аккаунта
+            </button>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <a class="logo" href="#home">style<span>fit</span>.</a>
+        <p>Открывай свой стиль. © 2026 StyleFit</p>
+        <a href="#home">Наверх ↑</a>
+    </footer>
+</body>
+</html>
