@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.git/
+.DS_Store
+.vscode/
+
+# Секреты и базы данных
+.env
+*.sqlite3
+media/
+staticfiles/

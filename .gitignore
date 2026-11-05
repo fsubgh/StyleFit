@@ -21,3 +21,6 @@ staticfiles/
 # IDE
 .vscode/
 .idea/
+
+# Базы данных SQLite
+*.sqlite3

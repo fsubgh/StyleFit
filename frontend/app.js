@@ -1,5 +1,6 @@
 const API_URL = 'http://127.0.0.1:8000/api/catalog';
 const AUTH_API_URL = 'http://127.0.0.1:8000/api/users';
+const PROFILE_API_URL = AUTH_API_URL + '/profile/';
 
 let allProducts = [];
 let selectedGender = 'all';
@@ -477,6 +478,8 @@ function showLoggedIn(email) {
     if (loginLink) {
         loginLink.textContent = email;
     }
+
+    loadProfile();
 }
 
 function showLoggedOut() {
@@ -713,3 +716,111 @@ recommendButton.addEventListener('click', getRecommendations);
 updateCartCount();
 loadProducts();
 loadBodyTypes();
+
+
+
+async function loadProfile() {
+    const token = localStorage.getItem('stylefit-access');
+    const message = document.getElementById('profile-message');
+
+    if (!token) return;
+
+    try {
+        const response = await fetch(PROFILE_API_URL, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.detail || 'Не удалось загрузить профиль.'
+            );
+        }
+
+        document.getElementById('profile-first-name').value =
+            data.first_name || '';
+
+        document.getElementById('profile-last-name').value =
+            data.last_name || '';
+
+        document.getElementById('profile-email').value =
+            data.email || '';
+
+        message.textContent = '';
+    } catch (error) {
+        message.textContent = error.message;
+    }
+}
+
+
+document.getElementById('profile-form').addEventListener(
+    'submit',
+    async function (event) {
+        event.preventDefault();
+
+        const token = localStorage.getItem('stylefit-access');
+        const message = document.getElementById('profile-message');
+        const button = event.currentTarget.querySelector(
+            'button[type="submit"]'
+        );
+
+        const profileData = {
+            first_name: document.getElementById(
+                'profile-first-name'
+            ).value.trim(),
+
+            last_name: document.getElementById(
+                'profile-last-name'
+            ).value.trim(),
+
+            email: document.getElementById(
+                'profile-email'
+            ).value.trim()
+        };
+
+        button.disabled = true;
+        message.textContent = 'Сохраняем изменения...';
+
+        try {
+            const response = await fetch(PROFILE_API_URL, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(profileData)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                const details = data.detail
+                    || Object.entries(data)
+                        .map(([key, value]) =>
+                            key + ': ' +
+                            (Array.isArray(value)
+                                ? value.join(' ')
+                                : String(value))
+                        )
+                        .join('\n');
+
+                throw new Error(
+                    details || 'Не удалось сохранить изменения.'
+                );
+            }
+
+            message.textContent =
+                'Личные данные успешно сохранены.';
+
+            document.getElementById('logged-in-username')
+                .textContent = data.email || profileData.email;
+        } catch (error) {
+            message.textContent = error.message;
+        } finally {
+            button.disabled = false;
+        }
+    }
+);

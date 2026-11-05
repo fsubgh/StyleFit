@@ -1,7 +1,7 @@
 Django
 djangorestframework
 django-cors-headers
-psycopg[binary]
-Pillow
-python-dotenv
 djangorestframework-simplejwt
+Pillow
+python-decouple
+psycopg[binary]

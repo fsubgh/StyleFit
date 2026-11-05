@@ -22,8 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='127.0.0.1,localhost'
+).split(',')
 
 
 # Application definition
@@ -43,7 +45,6 @@ INSTALLED_APPS = [
 
     'users',
     'catalog',
-    'orders',
 ]
 
 MIDDLEWARE = [
@@ -145,6 +146,8 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5500',
     'http://localhost:5500',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
 ]
 STATICFILES_DIRS = [
     BASE_DIR.parent / 'frontend',
