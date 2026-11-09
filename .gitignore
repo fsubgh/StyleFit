@@ -1,26 +1,19 @@
-
-# Python
 __pycache__/
 *.py[cod]
 *.pyo
 
-# Виртуальное окружение
 .venv/
 venv/
 env/
 
-# Django
 .env
 db.sqlite3
 media/
 staticfiles/
 
-# Системные файлы
 .DS_Store
 
-# IDE
 .vscode/
 .idea/
 
-# Базы данных SQLite
 *.sqlite3

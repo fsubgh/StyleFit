@@ -6,7 +6,7 @@ let allProducts = [];
 let selectedGender = 'all';
 let bodyTypes = [];
 
-// Элементы каталога
+
 const productList = document.getElementById('product-list');
 const productCount = document.getElementById('product-count');
 const genderSelect = document.getElementById('gender-select');
@@ -16,7 +16,7 @@ const recommendMessage = document.getElementById('recommend-message');
 const recommendationSection = document.getElementById('recommendations-section');
 const recommendationList = document.getElementById('recommendation-list');
 
-// Элементы авторизации
+
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
 const showLoginButton = document.getElementById('show-login');
@@ -28,9 +28,6 @@ const loggedInUsername = document.getElementById('logged-in-username');
 const logoutButton = document.getElementById('logout-button');
 
 
-// ========================================
-// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-// ========================================
 
 async function readResponse(response) {
     const text = await response.text();
@@ -111,9 +108,6 @@ function formatPrice(price) {
 }
 
 
-// ========================================
-// КОРЗИНА
-// ========================================
 
 
 function getCartStorageKey() {
@@ -194,9 +188,6 @@ function addToCart(product) {
 }
 
 
-// ========================================
-// КАТАЛОГ ТОВАРОВ
-// ========================================
 
 
 function createProductCard(product) {
@@ -331,9 +322,7 @@ async function loadProducts() {
 }
 
 
-// ========================================
-// ПОДБОР ОДЕЖДЫ
-// ========================================
+
 
 async function loadBodyTypes() {
     const gender = genderSelect.value;
@@ -443,9 +432,7 @@ async function getRecommendations() {
 }
 
 
-// ========================================
-// ВХОД И РЕГИСТРАЦИЯ
-// ========================================
+
 
 function showLoginForm() {
     loginForm.hidden = false;
@@ -506,9 +493,7 @@ showLoginButton.addEventListener('click', showLoginForm);
 showRegisterButton.addEventListener('click', showRegisterForm);
 
 
-// ----------------------------------------
-// ВХОД ПО ПОЧТЕ И ПАРОЛЮ
-// ----------------------------------------
+
 
 loginForm.addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -568,9 +553,7 @@ loginForm.addEventListener('submit', async function (event) {
 });
 
 
-// ----------------------------------------
-// РЕГИСТРАЦИЯ
-// ----------------------------------------
+
 
 registerForm.addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -585,7 +568,7 @@ registerForm.addEventListener('submit', async function (event) {
     const passwordRepeat =
         document.getElementById('register-password-repeat').value;
 
-    // Django User требует логин, поэтому создаём его автоматически.
+
     const username = email.split('@')[0];
 
     if (password !== passwordRepeat) {
@@ -672,9 +655,7 @@ registerForm.addEventListener('submit', async function (event) {
 });
 
 
-// ----------------------------------------
-// ВЫХОД
-// ----------------------------------------
+
 
 logoutButton.addEventListener('click', function () {
     showLoggedOut();
@@ -682,7 +663,7 @@ logoutButton.addEventListener('click', function () {
 });
 
 
-// Восстановление отображения после перезагрузки
+
 const savedUsername = localStorage.getItem('stylefit-username');
 const savedAccessToken = localStorage.getItem('stylefit-access');
 
@@ -693,9 +674,7 @@ if (savedUsername && savedAccessToken) {
 }
 
 
-// ========================================
-// ЗАПУСК САЙТА
-// ========================================
+
 
 document.querySelectorAll('.filter-button').forEach(function (button) {
     button.addEventListener('click', function () {

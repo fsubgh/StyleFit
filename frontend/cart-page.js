@@ -186,7 +186,7 @@ function renderCart() {
 }
 
 
-// Демонстрационное оформление заказа
+
 document.getElementById('checkout-form').addEventListener(
     'submit',
     function (event) {
@@ -210,7 +210,7 @@ document.getElementById('checkout-form').addEventListener(
         button.disabled = true;
         button.textContent = 'Обрабатываем...';
 
-        // Имитируем оформление заказа
+
         localStorage.setItem(getCartStorageKey(), '[]');
 
         updateCartCount();
